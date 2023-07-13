@@ -1,0 +1,21 @@
+.grid-container {
+    display: flex;
+    justify-content: space-between;
+    width: 960px;
+    height: 960px
+}
+
+.grid-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.grid-square {
+    border: 1px solid black;
+    flex: 1;
+}
+
+.filled {
+    background-color: black;
+}
