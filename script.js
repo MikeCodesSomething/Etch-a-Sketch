@@ -49,3 +49,11 @@ function fillSquare(event) {
     if(mousedown && eraserMode) event.target.classList.remove('filled');
 
 }
+
+
+//This stops us accidentally triggering the mouse to 'drag' 
+//Dragging messes up our drawing so we really don't want it
+document.body.addEventListener('dragstart', function(event) {
+    event.preventDefault(); // Prevent the default drag behavior
+  });
+  
