@@ -8,6 +8,14 @@ window.addEventListener('mousedown', () => mousedown = true);
 window.addEventListener('mouseup', () => mousedown = false);
 sizeSlider.addEventListener("mousemove", (e) => sizeLabel.innerText = `Size: ${e.target.value} x ${e.target.value}`);
 sizeSlider.addEventListener("change", generateGrid);
+let eraserMode = false
+let eraserButton = document.getElementById('eraser')
+eraserButton.addEventListener('click', (event) =>{
+    eraserMode = !eraserMode;
+    event.target.classList.toggle('selected');
+} 
+)
+
 generateGrid();
 
 //Functions
@@ -37,5 +45,7 @@ for(let i = 0; i < gridSquares.length; i++) {
 
 
 function fillSquare(event) {
-    if(mousedown) event.target.classList.add('filled')
+    if(mousedown && !eraserMode) event.target.classList.add('filled');
+    if(mousedown && eraserMode) event.target.classList.remove('filled');
+
 }

@@ -24,3 +24,7 @@
 input {
     margin-bottom: 15px;
 }
+
+.selected {
+    filter: invert(100%);
+}
