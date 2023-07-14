@@ -1,22 +1,45 @@
 //Script
 let sizeSlider = document.getElementById('size-slider');
 let gridSize = sizeSlider.value;
+let eraserButton = document.getElementById('eraser')
+let rainbowButton = document.getElementById('rainbow')
 let sizeLabel = document.querySelector('label');
 sizeLabel.innerText = `Size: ${gridSize} x ${gridSize}`;
+
 let mousedown = false;
+let eraserMode = false
+let rainbowMode = false
+
 window.addEventListener('mousedown', () => mousedown = true);
 window.addEventListener('mouseup', () => mousedown = false);
 sizeSlider.addEventListener("mousemove", (e) => sizeLabel.innerText = `Size: ${e.target.value} x ${e.target.value}`);
 sizeSlider.addEventListener("change", generateGrid);
-let eraserMode = false
-let eraserButton = document.getElementById('eraser')
-eraserButton.addEventListener('click', (event) =>{
+
+eraserButton.addEventListener('click', (e) =>{
     eraserMode = !eraserMode;
-    event.target.classList.toggle('selected');
-} 
-)
+    e.target.classList.toggle('selected');
+    rainbowMode = false;
+    rainbowButton.classList.remove('selected');
+    } 
+    )
+
+rainbowButton.addEventListener('click', (e) => {
+    rainbowMode = !rainbowMode
+    e.target.classList.toggle('selected');
+    eraserMode = false;
+    eraserButton.classList.remove('selected');
+    }
+    )
 
 generateGrid();
+
+
+//This stops us accidentally triggering the mouse to 'drag' 
+//Dragging messes up our drawing so we really don't want it
+document.body.addEventListener('dragstart', function(event) {
+    event.preventDefault(); // Prevent the default drag behavior
+  });
+  
 
 //Functions
 function generateGrid() {
@@ -39,21 +62,25 @@ function generateGrid() {
         gridContainer.appendChild(gridColumn)
 }
 for(let i = 0; i < gridSquares.length; i++) {
-    gridSquares[i].addEventListener('mouseover',fillSquare)
+    gridSquares[i].addEventListener('mouseover',updateSquare)
+    gridSquares[i].addEventListener('click',updateSquare)
+    //Using 2 event listeners because we want to draw on click and drag and also if the user clicks the specific square they want to change
 }
 }
 
 
-function fillSquare(event) {
-    if(mousedown && !eraserMode) event.target.classList.add('filled');
-    if(mousedown && eraserMode) event.target.classList.remove('filled');
+function updateSquare(e) {
+    if(!mousedown && e.type != 'click') return;
+    if(eraserMode) e.target.style.backgroundColor = 'white';
+    else if(rainbowMode) e.target.style.backgroundColor = getRandomColour()
+    else e.target.style.backgroundColor = 'black';
 
 }
 
+function getRandomColour() {
+    let colourOptions = ['red','yellow','pink','green','orange','purple','blue'];
+    let random = Math.floor(Math.random() * colourOptions.length);
+    return colourOptions[random];
+}
 
-//This stops us accidentally triggering the mouse to 'drag' 
-//Dragging messes up our drawing so we really don't want it
-document.body.addEventListener('dragstart', function(event) {
-    event.preventDefault(); // Prevent the default drag behavior
-  });
-  
+
