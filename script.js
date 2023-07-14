@@ -3,6 +3,9 @@ let sizeSlider = document.getElementById('size-slider');
 let gridSize = sizeSlider.value;
 let sizeLabel = document.querySelector('label');
 sizeLabel.innerText = `Size: ${gridSize} x ${gridSize}`;
+let mousedown = false;
+window.addEventListener('mousedown', () => mousedown = true);
+window.addEventListener('mouseup', () => mousedown = false);
 sizeSlider.addEventListener("mousemove", (e) => sizeLabel.innerText = `Size: ${e.target.value} x ${e.target.value}`);
 sizeSlider.addEventListener("change", generateGrid);
 generateGrid();
@@ -34,14 +37,5 @@ for(let i = 0; i < gridSquares.length; i++) {
 
 
 function fillSquare(event) {
-    event.target.classList.add('filled')
-    //console.log(gridSize)
+    if(mousedown) event.target.classList.add('filled')
 }
-
-//const gridSquare = document.createElement('div');
-//document.body.appendChild(resetButton)
-
-
-
-// resetButton.textContent = "Play Again";
-// resetButton.addEventListener('click',resetGame)
