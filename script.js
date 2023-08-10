@@ -1,11 +1,13 @@
 //Script
 let sizeSlider = document.getElementById('size-slider');
+let colorPicker = document.getElementById('colour-picker')
 let gridSize = sizeSlider.value;
 let eraserButton = document.getElementById('eraser')
 let rainbowButton = document.getElementById('rainbow')
 let sizeLabel = document.querySelector('label');
 sizeLabel.innerText = `Size: ${gridSize} x ${gridSize}`;
 
+let sketchColour = 'black';
 let mousedown = false;
 let eraserMode = false
 let rainbowMode = false
@@ -14,6 +16,7 @@ window.addEventListener('mousedown', () => mousedown = true);
 window.addEventListener('mouseup', () => mousedown = false);
 sizeSlider.addEventListener("mousemove", (e) => sizeLabel.innerText = `Size: ${e.target.value} x ${e.target.value}`);
 sizeSlider.addEventListener("change", generateGrid);
+colorPicker.addEventListener('change', (e) => sketchColour = e.target.value)
 
 eraserButton.addEventListener('click', (e) =>{
     eraserMode = !eraserMode;
@@ -73,7 +76,7 @@ function updateSquare(e) {
     if(!mousedown && e.type != 'click') return;
     if(eraserMode) e.target.style.backgroundColor = 'white';
     else if(rainbowMode) e.target.style.backgroundColor = getRandomColour()
-    else e.target.style.backgroundColor = 'black';
+    else e.target.style.backgroundColor = sketchColour;
 
 }
 

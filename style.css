@@ -17,10 +17,6 @@
     flex: 1;
 }
 
-.filled {
-    background-color: black;
-}
-
 input {
     margin-bottom: 15px;
 }
