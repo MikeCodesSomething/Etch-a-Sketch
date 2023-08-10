@@ -9,13 +9,18 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <h1>Etch-a-Sketch</h1>
-    <label for="size-slider"></label>
-    <input type="range" id="size-slider" min="8" max="100" value="32" step="4">
-    <input type="color" name="colour-picker" id="colour-picker" />
-    <button id="eraser">Eraser</button>
-    <button id="rainbow">Rainbow</button>
-    <div class="grid-container">
+    <h1>Etch-a-Sketch</h1>    
+    <div class="content">
+        <div class="settings">
+            <label for="size-slider"></label>
+            <input type="range" id="size-slider" min="8" max="100" value="32" step="4">
+            <label for="colour-picker">Colour</label>
+            <input type="color" name="colour-picker" id="colour-picker" />
+            <button id="eraser">Eraser</button>
+            <button id="rainbow">Rainbow</button>
+        </div>
+        <div class="grid-container"></div>
     </div>
+
 </body>
 </html>
